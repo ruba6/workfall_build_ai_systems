@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from shared_utils.com import generate_id
+from shared_utils.utils import generate_id
 import json, logging
 
 
