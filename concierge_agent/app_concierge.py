@@ -4,7 +4,6 @@ from typing import TypedDict
 from langgraph.graph import StateGraph
 import chromadb
 import json
-from dotenv import load_dotenv
 from crewai import LLM
 from chromadb.utils import embedding_functions
 import os
@@ -22,9 +21,7 @@ collection = client.get_or_create_collection(
     embedding_function=ef
 )
 
-
-load_dotenv("keys.env")
-key = os.environ["GROQ_API_KEY"]
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 llm = LLM(
     model="groq/llama-3.1-8b-instant",
@@ -54,7 +51,6 @@ def parse_intent(user_query: str):
 
     response = llm.call(prompt)
     try:
-        # return json.loads(response.content)
         return extract_json(response)
     except:
         return {"intent": "unknown"}
@@ -66,8 +62,8 @@ class State(TypedDict):
     customer_id: str
     property_id: str
     insights: str
-# ---------- NODES ----------
 
+# -----------------------------
 def parse_node(state: State):
     parsed = parse_intent(state["user_query"])
     state["parsed_data"] = parsed
@@ -108,8 +104,7 @@ def deal_node(state: State):
 
 def marketing_node(state: State):
     try:
-        results = collection.query(query_texts=["Bangalore property"], n_results=1)
-        # state["insights"] = str(results)
+        results = collection.query(query_texts=["Bangalore property"], n_results=1
         state["insights"] = "Market: Stable | Demand: High | ROI: Good"
     except Exception:
         state["insights"] = "No insights available"
@@ -126,7 +121,7 @@ def final_node(state: State):
     }
 
 
-# ---------- GRAPH ----------
+# ---------- GRAPH ---------- #
 graph = StateGraph(State)
 
 graph.add_node("parse", parse_node)
@@ -144,7 +139,7 @@ graph.add_edge("marketing", "final")
 
 workflow = graph.compile()
 
-# ---------- API ----------
+# ---------- API ---------- #
 @app.post("/query")
 def query(req: dict):
     try:
