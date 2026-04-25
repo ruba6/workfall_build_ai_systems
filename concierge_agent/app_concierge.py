@@ -72,7 +72,7 @@ def parse_node(state: State):
 def customer_node(state: State):
     try:
         res = requests.post("http://localhost:8001/onboard", json={
-            "payload": {"name": "guest_user"}
+            "payload": {"name": "guest"}
         }).json()
 
         state["customer_id"] = res.get("data", {}).get("customer_id", "NA")
