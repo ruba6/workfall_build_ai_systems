@@ -2,7 +2,6 @@ from fastapi import FastAPI
 import chromadb
 import logging
 import os
-from dotenv import load_dotenv
 from chromadb.utils import embedding_functions
 from crewai import LLM
 
@@ -18,12 +17,10 @@ collection = client.get_or_create_collection(
     embedding_function=ef
 )
 
-load_dotenv("keys.env")
-key = os.environ["GROQ_API_KEY"]
-if not key:
-    raise ValueError("GROQ_API_KEY not set")
 
-print("Groq API key loaded ✅")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise ValueError("GROQ_API_KEY not set")
 
 llm = LLM(
     model="groq/llama-3.1-8b-instant",
@@ -62,7 +59,6 @@ def analyze(req: dict):
     if not property_id:
         return {"status": "error", "error": "Missing property_id"}
 
-    # Placeholder LLM-style insight
     insight = generate_insight(data)
 
     collection.add(
