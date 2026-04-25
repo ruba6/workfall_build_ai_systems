@@ -1,7 +1,5 @@
 # Federated Multi-Agent Real Estate System using A2A Protocol
 
-
-
 # Overview
 This project is an AI based real estate concierge system built using a multi-agent architecture. It processes natural language queries from users and orchestrates multiple agents to:
 
@@ -10,7 +8,6 @@ This project is an AI based real estate concierge system built using a multi-age
 - Register property requirements  
 - Generate market insights  
 - Store and retrieve data using a vector database  
-
 
 # Setup Instructions
 
@@ -35,7 +32,7 @@ This project is an AI based real estate concierge system built using a multi-age
 
 # Execution Steps
 
-Step 1: Start all agents (in separate terminals)
+Step 1: Start all agents (in separate terminals
 In terminal run command
 bash run_all_agents.sh
 
@@ -46,7 +43,7 @@ Marketing Agent (Port 8003)
 Orchestrator (Main API - Port 8000)
 
 
-Step 2: Open Swagger UI
+Step 2: Open Swagger UI (each ports in seperate tabs)
 Go to: http://localhost:8000/docs
 
 Step 3: Test API
