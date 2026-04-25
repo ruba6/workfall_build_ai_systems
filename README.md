@@ -7,7 +7,14 @@ This project is an AI based real estate concierge system built using a multi-age
 - Create a customer profile  
 - Register property requirements  
 - Generate market insights  
-- Store and retrieve data using a vector database  
+- Store and retrieve data using a vector database
+
+# Tech Stack
+- FastAPI
+- LangGraph (workflow orchestration)
+- Groq LLM (intent parsing)
+- ChromaDB (vector storage)
+- Python
 
 # Setup Instructions
 
